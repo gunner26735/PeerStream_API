@@ -1,0 +1,32 @@
+<html>
+  <head>
+    <title>PeerStream</title>
+  </head>
+
+  <body>
+    <script src="https://cdn.jsdelivr.net/npm/hls.js@1"></script>
+    <!-- <script src="../dist/hls.js"></script> -->
+
+    <center>
+      <h1>PeerStream</h1>
+      <video height="600" id="video" controls></video>
+    </center>
+
+    <script>
+      var video = document.getElementById('video');
+      if (Hls.isSupported()) {
+        var hls = new Hls({
+          debug: true,
+        });
+        //hls.loadSource('https://test-streams.mux.dev/x36xhzz/x36xhzz.m3u8');
+        hls.loadSource('https://cdn.livepeer.com/hls/d8e4hxe6rbyxf8nl/index.m3u8');
+        hls.attachMedia(video);
+        hls.on(Hls.Events.MEDIA_ATTACHED, function () {
+          video.muted = true;
+          video.play();
+        });
+
+      }
+    </script>
+  </body>
+</html>
