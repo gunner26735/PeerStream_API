@@ -31,4 +31,4 @@ app.set("view engine","ejs");
 app.use('/',require('./server/routes/router'))
 
 
-app.listen(PORT,()=>{console.log('Server runnning on http://localhost:'+PORT)});
+app.listen(4000,()=>{console.log('Server runnning on http://localhost:'+4000)});
