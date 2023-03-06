@@ -1,5 +1,5 @@
 const streamerDB = require('../model/model_streamer')
-
+const watcherDB = require('../model/model_watcher')
 /*
 TO create new Streamer
 */
@@ -90,10 +90,50 @@ exports.allStreamers = (req,res)=>{
     })
 }
 
-/**
- * 
- * <p>s1</p>
- * <p>s2</p>
- * <p>s3</p>
- * 
- */
+// To set watcher & streamer pair
+exports.setWatcher = (req,res) =>{
+    if(!req.body){
+        res.status(400).send({message:'content cannot be empty'});
+        return;
+    }
+
+    var watcher = watcherDB.updateOne(
+        {
+            walletAddress : req.body.walletAddress,
+            playbackId : req.body.playbackId,
+        },
+        {
+        walletAddress : req.body.walletAddress,
+        playbackId : req.body.playbackId,
+        isWatching : req.body.iswatching,
+        },
+        {upsert : true},
+        (err)=>{
+            if(err){
+                res.status(400).json({error:"Something went wrong"})
+            } else {
+                res.status(200).json({message:"Streamer updated successfully"})
+            }
+        }
+    )
+}
+
+//It will return all watchers detail of current p_id
+exports.watcherCount = (req,res) =>{
+    console.log("IN WATCHER");
+    if(req.body.p){
+        const p_id = req.body.p;
+        watcherDB.find({playbackId : p_id}).then(data => {
+            if(!data){
+                res.status(404).send(false)
+            }else{
+                res.send(data);
+            }
+        }).catch(err=>{
+            res.status(500).send({message:err.message || "some error occurred "})
+        })
+    }
+    else{
+        res.status(400).json({message:"Something missing"});
+    }
+}

@@ -10,7 +10,8 @@ route.get('/api/streamer/:wAddress',controller.isStreamer)//first time or not
 route.post('/api/u_streamer',controller.update)//To update an existing streamer
 route.get('/api/live',controller.getStreamers)//To get streamer who are streaming currently
 route.get('/api/liststreamer',controller.allStreamers)//To get all the streamer
-
+route.post('/api/set_watcher',controller.setWatcher)//To get all the streamer
+route.post('/api/watcher_count',controller.watcherCount)//To get all the Watcher's detail
 
 
 module.exports = route
