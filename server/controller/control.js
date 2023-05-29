@@ -1,5 +1,5 @@
-const streamerDB = require('../model/model_streamer')
-const watcherDB = require('../model/model_watcher')
+const streamerDB = require('../model/model_streamer');
+const watcherDB = require('../model/model_watcher');
 /*
 TO create new Streamer
 */
@@ -16,7 +16,8 @@ exports.createStreamer = (req,res)=>{
         streamName : req.body.streamName,
         streamInfo : req.body.streamInfo,
         playbackId : req.body.playbackId,
-        isStreaming : req.body.setStream
+        isStreaming : req.body.setStream,
+        flowrate : req.body.flowrate
     })
 
     streamer
@@ -43,6 +44,9 @@ exports.isStreamer = (req,res)=>{
             res.status(500).send({message:err.message || "some error occurred in finding Wallet."})
         })
 
+    }
+    else{
+        res.status(400).send({message:err.message || "some error in query."})
     }
 }
 

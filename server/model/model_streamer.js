@@ -23,6 +23,10 @@ var schema = new mongo.Schema({
     totalEarning : {
         type : Number,
         default : 0
+    },
+    flowrate : {
+        type : Number,
+        default : 0
     }
 
 }) 
