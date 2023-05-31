@@ -59,6 +59,7 @@ exports.update = (req,res)=>{
             streamInfo : req.body.streamInfo,
             playbackId : req.body.playbackId,
             isStreaming : req.body.isStreaming,
+            flowrate : req.body.flowrate
         },
         (err)=>{
             if(err){
